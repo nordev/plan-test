@@ -18,23 +18,26 @@ class Extractor:
 
     def list_data_bases(self):
         databases = ("show databases")
-        return self.cursor.execute(databases)
+        self.cursor.execute(databases)
+        return [x[0] for x in self.cursor.fetchall()]
 
     def list_tables(self):
-        return self.cursor.execute("SHOW tables")
+        self.cursor.execute("SHOW tables")
+        return [x[0] for x in self.cursor.fetchall()]
 
     def set_db(self, db_name):
         self.cursor.execute("USE {}".format(db_name))
 
     def execute(self, query):
-        return self.cursor.execute(query)
+        self.cursor.execute(query)
+        return self.cursor
 
     def export_table(self, table_name, csv_dst):
-        cur = self.cursor.execute("SELECT * FROM {}".format(table_name))
+        self.cursor.execute("SELECT * FROM {}".format(table_name))
         with open(csv_dst, "wb") as csv_file:
             csv_writer = csv.writer(csv_file)
-            csv_writer.writerow([i[0] for i in cur.description])
-            csv_writer.writerows(cur)
+            csv_writer.writerow([i[0] for i in self.cursor.description])
+            csv_writer.writerows(self.cursor)
 
     def close_db(self):
         self.db.close()
