@@ -5,7 +5,7 @@ from src.extractor import Extractor
 class TestExtractor(unittest.TestCase):
 
     def setUp(self):
-        src_db_config = "../config/db_config.json"
+        src_db_config = "/opt/repos/plan-test/config/db_config.json"
         self.extractor = Extractor(src_db_config)
 
     def tearDown(self):
@@ -28,7 +28,7 @@ class TestExtractor(unittest.TestCase):
 
     def test_export_table(self):
         table = "fever_plans"
-        csv_dst = "./out/fever_plans.csv"
+        csv_dst = "/opt/repos/plan-test/test/out/fever_plans.csv"
         self.extractor.export_table(table, csv_dst)
 
 if __name__ == '__main__':
