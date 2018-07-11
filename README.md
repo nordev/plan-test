@@ -29,7 +29,7 @@ sh execute_test.sh
 
 ## Prerrequisitos
 
-###Instalar python y pip
+### Instalar python y pip
 ```sh
 # actualizar lista de paquetes
 sudo apt update
@@ -56,7 +56,7 @@ posteriores. Omite los que empiecen con sudo pip install.
 Nota: Existen soluciones mejores que pip que permiten la virtualización de la gestión de paquetes y permitir la mejor convivencia de diversos proyectos python. Hablamos de pipenv.
 
 
-###Instalar cliente para MySQL
+### Instalar cliente para MySQL
 
 ```sh
 # Instalar dependencias para librería de python mysqlclient
@@ -129,9 +129,6 @@ python -m unittest test_extractor.TestExtractor
 sh /opt/repos/plan-test/test/execute_test.sh
 ```
 
-
-# Planificación de la ejecución
-
 # Ejecución de la aplicación
 ```sh
 python /opt/repos/plan-test/src/controller.py
@@ -142,7 +139,7 @@ python /opt/repos/plan-test/src/controller.py
 Aunque se podría haber programado la aplicación entera en un solo script.
 Se ha buscado poner en valor otras skills. Se utiliza la programación orientada a objetos para descomponer y encapsular 
 la aplicación en varias clases siguiendo la lógica de un proceso ETL.
-Se hacen test unitarios que permiten probar aisladamente la funcionalidad de diversas clases u hacer refactoring de las mismas.
+Se hacen test unitarios que permiten probar aisladamente la funcionalidad de diversas clases o hacer refactoring de las mismas.
 Se utiliza el patrón de diseño MVC (Modelo Vista Controlador).
 Aunque no exista la vista dejamos la arquitectura preparada.
 En general a pesar del breve tiempo de desarrollo se han intendo seguir las buenas prácticas de programación y código limpio.
@@ -169,7 +166,7 @@ Se utiliza la librería de Python llamada Pandas para realizar todas las transfo
 a la eficiencia. Se ha creado en las dos "tablas" una columna llamada "_id" que se encarga de crear un id único para el 
 posterior alamacenamiento en BD. Este id es una concatenación de strings que resulta ser bastante largo
 y repercute en la cantidad de almacenamiento en disco necesario en BD. Tampoco he entrado demasiado en temas de data cleaning, más alla de borrar registros duplicados y cuestiones triviales.
-Por poner algún ejemplo he detectado que el sistema operativo IOS aparece en algunos registros como "IOS" y en otros como "ios". Se podrían haber hecho más tareas de limpieza como trimming o lowercase. 
+Por poner algún ejemplo he detectado que el sistema operativo IOS aparece en algunos registros como "IOS" y en otros como "ios". Se podrían haber hecho más tareas de limpieza como trimming o case insensitive. 
 
 
 ## Carga
@@ -177,6 +174,6 @@ La primera carga se hace de una forma muy eficiente. Se suben todos los datos qu
 en batch a la Base de Datos. En las siguientes ejecuciones la eficicencia de este proceso depende de la naturaleza de los datos 
 que se suban. Es decir, si en una segunda subida se detecta que hay alguna clave duplicada. El proceso de inserción/actualización
 ya no se realiza en batch. Si no que se realiza linea a linea. Una mejor aproximación sería detectar todas los registros
-que van a ser actualizados y hacer una actualización en batch. Esto no se ha implementado por falta de tiempo.
+que van a ser actualizados y hacer una actualización en batch.
 
 
